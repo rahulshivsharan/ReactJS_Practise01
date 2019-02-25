@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 01</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<style type="text/css">
+			table{
+				width: 50%;
+				border: 1px;				
+			}
+
+			thead{
+				color: white;
+				background-color: #544C53;				
+			}
+
+			tbody{
+				background-color: #FEE4FA;
+				color : black;				
+			}
+		</style>
+	</head>
+	<body>		
+		<table>
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Age</td>
+					<td>Prodession</td>
+					<td>Residence</td>
+				</tr>
+			</thead>
+			<tbody id="example"></tbody>
+		</table>
+
+		<script type="text/babel">
+			var studentList = [{
+				name : "Rahul Shivsharan",
+				age : 38,
+				profession : "Software Developer",
+				residence : "Mumbai"
+			},{
+				name : "Vinod Khosla",
+				age : 29,
+				profession : "Software Consultant",
+				residence : "Saharanpur"
+			},{
+				name : "Shyam Ramachandran",
+				age : 46,
+				profession : "Director",
+				residence : "Delhi"
+			},{
+				name : "Chandresh Patel",
+				age : 36,
+				profession : "Sofware Test Lead",
+				residence : "Lucknow"
+			},{
+				name : "Milind Sawant",
+				age : 34,
+				profession : "Systems Engineer",
+				residence : "Kolhapur"
+			},{
+				name : "Vishal Chaturvedi",
+				age : 44,
+				profession : "Senior Manager",
+				residence : "Varanasi"
+			}];
+
+			function renderContent(student,index){
+				return <tr key={index}>
+						<td>{student.name}</td>
+						<td>{student.age}</td>
+						<td>{student.profession}</td>
+						<td>{student.residence}</td>
+				</tr>;
+			}
+
+			ReactDOM.render(studentList.map(renderContent),document.getElementById("example"));
+		</script>
+	</body>
+</html>
