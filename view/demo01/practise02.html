@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 01</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->		
+		<style type="text/css">
+			table{
+				width: 50%;
+				border: 1px;
+			}
+
+			thead{
+				color: white;
+				background-color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React DEMO 01</h1>
+		<div id="example"></div>
+
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+		<script type="text/babel">
+			ReactDOM.render(
+				<table>
+					<thead>
+						<tr>
+							<td>Name</td>
+							<td>Age</td>
+						</tr>
+					</thead>
+					<tbody>						
+						<tr>
+							<td>Rahul Shivsharan</td>
+							<td>38</td>
+						</tr>
+					</tbody>
+				</table>,
+				document.getElementById("example"));
+		</script>
+	</body>
+</html>
