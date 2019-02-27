@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 05</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+	</head>
+	<body>
+		<h1>React Custom Component rendering collection</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+
+			class NotesList extends React.Component{
+
+				render(){
+					return(
+						<ol>
+						{
+							React.Children.map(this.props.children,function(child){
+								return <li>{child}</li>
+							})
+						}
+						</ol>
+					);
+				} // end of render
+			} // end of class			
+
+			ReactDOM.render(
+				<NotesList>
+					<span>Hello,</span>
+					<span>World</span>					
+				</NotesList>,
+				document.getElementById("example")
+			);
+		</script>
+	</body>
+</html>
