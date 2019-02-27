@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 01</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<style type="text/css">
+			.btn{
+				font-weight: bold;
+				color : blue;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React Component Usage</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			class HelloMessage extends React.Component{
+				render(){
+					return <h1 className="btn">Hello, {this.props.name}</h1>;
+				}
+			}			
+
+			ReactDOM.render(<HelloMessage name="Rahul Shivsharan" />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
