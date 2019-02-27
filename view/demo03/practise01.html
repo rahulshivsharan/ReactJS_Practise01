@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 01</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+	</head>
+	<body>		
+		<h3>Cities in India</h3>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			var arr = [
+				<li key="1">Bishnoi</li>,
+				<li key="2">Nashik</li>,
+				<li key="3">Aurangabad</li>,
+				<li key="4">Rourkela</li>,
+				<li key="5">Mehsana</li>,
+				<li key="6">Vellur</li>,
+				<li key="7">Bellavade</li>,
+				<li key="8">Wai</li>
+			];
+			ReactDOM.render(<ul>{arr}</ul>,document.getElementById("example"));
+		</script>
+	</body>
+</html>
