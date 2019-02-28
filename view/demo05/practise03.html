@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 05</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+		<style type="text/css">
+			table{
+				width: 50%;
+				border: 1px;				
+			}
+
+			thead{
+				color: white;
+				background-color: #483D8B;				
+			}
+
+			tbody{
+				background-color: #87CEFA;
+				color : black;				
+			}
+
+			caption{
+				font-weight: bold;
+				background-color: #483D8B;				
+				color:white;				
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React Custom Component rendering Professionals</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			var studentList = [{
+				name : "Ronald Reagan",
+				age : 28,
+				profession : "Software Developer",
+				residence : "United Kingdom"
+			},{
+				name : "Viki Cristiano",
+				age : 29,
+				profession : "Software Consultant",
+				residence : "Italy"
+			},{
+				name : "Ombaka Idaho",
+				age : 46,
+				profession : "Director",
+				residence : "Kenya"
+			},{
+				name : "Srukindu Tuba",
+				age : 36,
+				profession : "Sofware Test Lead",
+				residence : "Benin"
+			},{
+				name : "Shuzuma Takeshi",
+				age : 34,
+				profession : "Systems Engineer",
+				residence : "Japan"
+			},{
+				name : "Elbarto El Nino",
+				age : 44,
+				profession : "Senior Manager",
+				residence : "Argentina"
+			}];
+
+			class StudentList extends React.Component{
+
+				render(){
+					return(
+						<table>	
+							<caption>Software Team</caption>
+							<thead>								
+								<tr>
+									<td>Name</td>
+									<td>Age</td>
+									<td>Profession</td>
+									<td>Residence</td>
+								</tr>
+							</thead>
+							<tbody>
+							{
+								React.Children.map(this.props.children,function(rowElement){
+									return rowElement;
+								})
+							}
+							</tbody>
+						</table>	
+					);
+				} // end of render
+			} // end of class			
+
+			ReactDOM.render(
+				<StudentList>					
+						{
+							studentList.map(function(student,index){
+								return (
+									<tr key={index}>
+										<td>{student.name}</td>
+										<td>{student.age}</td>
+										<td>{student.profession}</td>
+										<td>{student.residence}</td>
+									</tr>
+								);
+							})
+						}
+				</StudentList>,
+				document.getElementById("example")
+			);
+		</script>
+	</body>
+</html>
