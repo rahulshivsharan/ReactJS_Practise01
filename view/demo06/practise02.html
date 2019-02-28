@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 06 - 1</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<script src="../../lib/prop-types.js"></script>
+	</head>
+	<body>
+		<h1>React DEMO 06 - 1</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			var data = "20065";
+			class MyTitle extends React.Component {
+				render(){
+					return <h1>{this.props.title}</h1>;
+				}
+			}
+			MyTitle.propTypes = {
+					title : PropTypes.string.isRequired
+			}
+			ReactDOM.render(<MyTitle title={data} />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
