@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 07 - 1</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+	</head>
+	<body>
+		<h1>React DEMO 06 - 1</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			
+			class MyComponent extends React.Component {
+
+				constructor(props){
+					super(props);
+					this.myTextInput = React.createRef();
+					this.printMe = this.printMe.bind(this);
+				}
+
+				printMe(){
+					var txtVal = this.myTextInput.current.value;
+					if(txtVal !== ""){
+						console.log(txtVal);
+					}					
+				}
+
+				render(){
+					return (
+						<div>
+							<input type="text" ref={this.myTextInput} />
+							<button onClick={this.printMe}>Click</button>
+						</div>
+					)
+				}
+			}
+			
+			ReactDOM.render(<MyComponent />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
