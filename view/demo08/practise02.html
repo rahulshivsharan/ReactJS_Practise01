@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 07 - 2</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+		<style type="text/css">
+			a:link {
+				text-decoration: none;
+			}
+
+			a:visited {
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: none;
+			}
+
+			a:active {
+				text-decoration: none;
+			}
+
+			a p{
+				color: black;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React DEMO 07 - 2</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			class DisplayMe extends React.Component {
+				
+
+				constructor(props){
+					super(props);					
+					
+					this.state = { 
+						liked : false 
+					}
+
+					this.handleClick = this.handleClick.bind(this);					
+				}
+
+				handleClick(event){					
+					this.setState({ liked : !this.state.liked });											
+				}
+
+				render(){
+					var text = this.state.liked ? 'liked' : 'haven\'t liked';
+					return (
+						<a href="#" onClick={this.handleClick}>
+							<p>You {text}. Click to toggle.</p>
+						</a>
+					);
+				}
+			}
+			
+			ReactDOM.render(<DisplayMe />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
