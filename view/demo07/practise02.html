@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 07 - 2</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>		
+	</head>
+	<body>
+		<h1>React DEMO 07 - 2</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+			
+			class DisplayMe extends React.Component{
+
+				constructor(props){
+					super(props);
+				}
+
+				render(){					
+					return <p>{this.props.something}</p>;
+				}
+			}
+
+			class StudentForm extends React.Component {
+				
+
+				constructor(props){
+					super(props);
+					this.myTextInput = React.createRef();
+
+					this.state = {
+						name : "Mehul"
+					};
+
+					this.printMe = this.printMe.bind(this);
+					
+				}
+
+				printMe(event){
+					var txtVal = this.myTextInput.current.value;
+					this.setState({ "name" : txtVal});											
+				}
+
+				render(){
+					return (
+						<div>
+							<input type="text" ref={this.myTextInput} />&nbsp;
+							<button onClick={this.printMe}>Click</button>
+							<br/>
+							<DisplayMe something={this.state.name} />
+						</div>
+					);
+				}
+			}
+			
+			ReactDOM.render(<StudentForm />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
