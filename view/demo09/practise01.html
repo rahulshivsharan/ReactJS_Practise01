@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 09 - 01</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<style type="text/css">
+		.me{
+			color : #17202A;
+			font-weight: bold;
+			font-size: 100px;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>React DEMO 01</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+
+			class Hello extends React.Component{
+				constructor(props){					
+					super(props);
+					this.state = {
+						opacity : 1.0
+					};
+				}
+
+				/*
+					This below method 'componentDidMount' gets called
+					once a compomnent is ready. It gets called after constructor
+				*/
+				componentDidMount(){
+
+					var fn = function(){						
+						var opacity = this.state.opacity;
+						opacity = opacity - 0.5;
+						
+						if(opacity < 0.1){
+							opacity = 1.0;
+						}
+
+						this.setState({
+							"opacity" : opacity
+						});
+					};
+
+					this.timer = setInterval(fn.bind(this),100);
+				}
+
+				render(){
+					return (
+						<div style={{opacity : this.state.opacity}} className="me">
+							Hello, {this.props.name}
+						</div>
+					);
+				} 
+			} // end of class Hello
+
+			ReactDOM.render(<Hello  name="Rahul"/>,document.getElementById("example"));
+		</script>
+	</body>
+</html>
