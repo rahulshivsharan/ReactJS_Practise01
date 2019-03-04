@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 10 - 1</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<script src="../../lib/jquery.min.js" type="text/javaScript"></script>
+		<style type="text/css">
+			table{
+				width : 75%;
+				padding-left: 10%
+			}
+
+			thead{
+				background-color: #212F3D;
+				color : white;
+			}
+
+			tbody{
+				background-color: #F2F3F4;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React DEMO 10</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+
+			function loadCountryInfo(obj){
+				var urlMap = {
+					"india" : "https://restcountries.eu/rest/v2/name/india",
+					"uk" : "https://restcountries.eu/rest/v2/name/uk",
+					"arab" : "https://restcountries.eu/rest/v2/name/uk",
+					"united" : "https://restcountries.eu/rest/v2/name/united",
+					"ti" : "https://restcountries.eu/rest/v2/name/ti"
+				}
+
+				var promise1 = $.get(urlMap["india"]);
+				var promise2 = $.get(urlMap["uk"]);
+				var promise3 = $.get(urlMap["arab"]);
+				var promise4 = $.get(urlMap["united"]);
+				var promise5 = $.get(urlMap["ti"]);
+
+				$.when(promise1,promise2,promise3,promise4,promise5).done(function(response1,response2,response3,response4,response5){ // success callback
+					var d1 = response1[0],
+						d2 = response2[0],
+						d3 = response3[0],
+						d4 = response4[0],
+						d5 = response5[0];
+					/*
+					console.log(d1);
+					console.log(d2);
+					console.log(d3);
+					console.log(d4);
+					*/
+
+					var countryList = [];
+					$.each(d1,function(index,data){
+						countryList.push(data);
+					});
+
+					$.each(d2,function(index,data){
+						countryList.push(data);
+					});
+
+					$.each(d3,function(index,data){
+						countryList.push(data);
+					});
+
+					$.each(d4,function(index,data){
+						countryList.push(data);
+					});
+
+					$.each(d5,function(index,data){
+						countryList.push(data);
+					});
+
+					obj.setState({
+						"countries" : countryList 
+					});
+				});
+			}
+
+			class CountryInfo extends React.Component{
+				constructor(props){
+					super(props);
+					this.state = {
+						"countries" : []
+					}
+				}
+
+				componentDidMount(){
+					(loadCountryInfo)(this);
+				}
+
+				render(){
+					return (
+						<table>
+							<thead>
+								<tr>
+									<th align="left">Country Code</th>
+									<th align="left">Name</th>
+									<th align="left">Region</th>
+									<th align="left">Capital</th>
+									<th align="left">Population</th>
+								</tr>
+							</thead>
+							<tbody>{this.state.countries.map(function(country,index){
+										return <tr key={index}>
+											<td>{country.alpha3Code}</td>
+											<td>{country.name}</td>
+											<td>{country.region}</td>
+											<td>{country.capital}</td>
+											<td>{country.population}</td>
+										</tr>;
+									})								
+								}							
+							</tbody>
+						</table>
+					);					
+				}
+			} 
+
+			ReactDOM.render(<CountryInfo />,document.getElementById("example"));
+		</script>
+	</body>
+</html>
