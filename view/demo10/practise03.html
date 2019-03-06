@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>React Demo 10 - 3</title> 
+		<meta charset="utf-8" /> <!-- This tag is required or else babel gives regex error -->
+		<script src="../../lib/react.development.js" type="text/javaScript"></script>		
+		<script src="../../lib/react-dom.development.js"></script>
+		<script src="../../lib/babel.min.js" type="text/javaScript"></script>
+		<script src="../../lib/jquery.min.js" type="text/javaScript"></script>
+		<style type="text/css">
+			#countryInfo{
+				width : 75%;
+				padding-left: 10%
+			}
+
+			img{
+				padding-left: 10%
+			}
+
+			#countryInfo tr td:nth-child(2){
+				font-weight: bold;
+			}
+
+			#countrySelect{				
+				padding-left: 10%
+			}
+
+			#countryInfo thead{
+				background-color: #212F3D;
+				color : white;
+			}
+
+			#countryInfo tbody{
+				background-color: #F2F3F4;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>React DEMO 10 - 3</h1>
+		<div id="example"></div>
+
+		<script type="text/babel">
+		var countInfoObject = undefined;
+			var countryList = [{
+				"name" : "India",
+				"code" : "india"
+			},{
+				"name" : "Afganistan",
+				"code" : "afganistan"
+			},{
+				"name" : "Argentina",
+				"code" : "argentina"
+			},{
+				"name" : "China",
+				"code" : "china"
+			},{
+				"name" : "Chile",
+				"code" : "chile"
+			},{
+				"name" : "Haiti",
+				"code" : "haiti"
+			},{
+				"name" : "Botswana",
+				"code" : "botswana"
+			},{
+				"name" : "Indonesia",
+				"code" : "indonesia"
+			},{
+				"name" : "Fiji",
+				"code" : "fiji"
+			}];
+			
+			class CountrySelectComponent extends React.Component{
+				constructor(props){
+					super(props);
+					this.state = {
+						"countries" : countryList						
+					}
+					this.getCountryInfo = this.getCountryInfo.bind(this);
+				} // end of constructor
+
+				getCountryInfo(event){
+					var date = new Date();
+					$("#countryInfo").hide();
+
+					countInfoObject.setState({
+						"isLoaded" : false
+					});
+
+
+					var selected_country = $("#countryName").val();
+					var url = "https://restcountries.eu/rest/v2/name/"+selected_country+"?fullText=true&date="+date.getTime();
+					var obj = this;
+					$.ajax({
+						"url" : url,
+						"dataType" : "json",
+						"success" : function(response){							
+							countInfoObject.setState({
+								"country" : response[0],
+								"isLoaded" : true
+							});
+							$("#countryInfo").show();
+						},
+						"error" : function(error){
+							console.log("error ",error);
+						}
+					});
+				} // end of getCountryInfo
+
+				render(){
+					return (
+						<table id="countrySelect">
+								<tbody>
+								<tr>
+									<td>Select Your Country</td>
+									<td>
+										<select id="countryName" onClick={this.getCountryInfo}>
+											<option value="select">Select</option>
+											{
+													this.state.countries.map(function(country,index){
+														return <option key={index} value={country.code}>
+																{country.name}
+														</option>;
+												})
+											}
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					)
+				}	
+
+			} // end of class CountrySelectComponent
+
+			class CountryInfoComponent extends React.Component{
+				constructor(props){
+					super(props);
+					this.state = {
+						"isLoaded" : true,						
+						"country" : {}
+					}
+
+					countInfoObject = this;					
+				} // end of constructor	
+				
+				componentDidMount(){					
+					$("#countryInfo").hide();
+				}
+
+				render(){
+					if(this.state.isLoaded === true){
+						return (
+							<table id="countryInfo">								
+									<tbody>
+											<tr>
+												<td align="right">Country Code</td>
+												<td>{this.state.country.alpha3Code}</td>
+											</tr>	
+											<tr>
+												<td align="right">Country Name</td>
+												<td>{this.state.country.name}</td>
+											</tr>	
+											<tr>
+												<td align="right">Region</td>
+												<td>{this.state.country.region}</td>
+											</tr>
+											<tr>
+												<td align="right">Capital</td>
+												<td>{this.state.country.capital}</td>
+											</tr>
+											<tr>
+												<td align="right">Population</td>
+												<td>{this.state.country.population}</td>
+											</tr>					
+									</tbody>
+								</table>						
+						);
+					}else{
+						return <img src="../../images/loader01.gif" alt="Loading..." />
+					}						
+				} // end of render
+			} // end of CountryInfoComponent
+
+			ReactDOM.render(<div>
+								<CountrySelectComponent />
+								<br/>
+								<CountryInfoComponent />
+							</div>,
+							document.getElementById("example"));
+		</script>
+	</body>
+</html>
